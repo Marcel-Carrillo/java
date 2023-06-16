@@ -9,7 +9,7 @@ public class IMC {
 	}
 	
 	
-	private static void peticion(){
+	public static void peticion(){
 		
 		Scanner scanner = new Scanner(System.in);
 		
