@@ -24,13 +24,13 @@ public class IMC {
 		float imcFinal = peso / estaturaFinal;
 		
 		if(imcFinal < 16) {
-			System.out.println("Desnutrido");
+			System.out.println("Eres Desnutrido");
 		}else if(imcFinal >= 16 && imcFinal < 18) {
-			System.out.println("Delgado");
+			System.out.println("Eres Delgado");
 		}else if(imcFinal >= 18 && imcFinal < 25){
-			System.out.println("Ideal");
+			System.out.println("Peso Ideal");
 		}else if(imcFinal >= 25 && imcFinal <31) {
-			System.out.println("Sobrepeso");
+			System.out.println("Tienes Sobrepeso");
 		}else if(imcFinal >= 31) {
 			System.out.println("Obeso");
 		}
