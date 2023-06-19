@@ -3,7 +3,7 @@ package proyecto.model;
 import java.util.Arrays;
 import java.util.List;
 
-public class Proyecto {
+public class Restaurante {
 
 	// id?¿
 	private String nombre;
@@ -15,11 +15,11 @@ public class Proyecto {
 	private String barrio;
 	private List<String> especialidades;
 
-	public Proyecto() {
+	public Restaurante() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Proyecto(String nombre, String direccion, String web, String fichaGoogle, float latitud, float longitud,
+	public Restaurante(String nombre, String direccion, String web, String fichaGoogle, float latitud, float longitud,
 			String barrio, String... especialidades) // varargs
 	{
 		super();
