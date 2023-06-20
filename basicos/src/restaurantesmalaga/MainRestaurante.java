@@ -77,7 +77,16 @@ public class MainRestaurante {
 			Restaurante r5 = ListRest.get(4);
 			boolean esta = buscarRestaurante(ListRest, r5);
 			System.out.println("R5 esta en la lista " + esta);
-			
+
+			List<Restaurante> estaLaEspecialidad = buscarPorEspecialidad(ListRest, " fritura");
+			System.out.println("Los restaurantes que tienen la especialidad que te gusta son " + estaLaEspecialidad);
+
+			List<Restaurante> estaElNombre = buscarPorNombre(ListRest, "McDonadls2");
+			System.out.println("Los restaurantes que tienen el nombre que buscas son " + estaElNombre);
+
+			List<Restaurante> estaElBarrio = buscarPorBarrio(ListRest, "la palmilla");
+			System.out.println("Los restaurantes que estan en el barrio que quieres son " + estaElBarrio);
+
 		} else {
 			System.out.println("No existe el fichero en esa ruta: (");
 		}
@@ -91,19 +100,56 @@ public class MainRestaurante {
 			System.out.println(r.toString());
 		}
 	}
-	
-	public static boolean buscarRestaurante (List<Restaurante> ListRest, Restaurante restauranteBuscado) {
+
+	public static boolean buscarRestaurante(List<Restaurante> ListRest, Restaurante restauranteBuscado) {
 		boolean estaRestaurante = false;
 		int pos_actual = 0;
 		int longitud = ListRest.size();
 		Restaurante restauranteAux = null;
-		
-		while (pos_actual < longitud && !estaRestaurante ) {
+
+		while (pos_actual < longitud && !estaRestaurante) {
 			restauranteAux = ListRest.get(pos_actual);
 			estaRestaurante = restauranteAux.equals(restauranteBuscado);
 			pos_actual += 1;
 		}
-		
+
 		return estaRestaurante;
 	}
+
+	public static List<Restaurante> buscarPorEspecialidad(List<Restaurante> ListRest, String especialidadBuscada) {
+		List<Restaurante> ListaDeRestaurantes = new ArrayList<>();
+
+		for (Restaurante restaurante : ListRest) {
+			if (restaurante.getEspecialidades().contains(especialidadBuscada)) {
+				ListaDeRestaurantes.add(restaurante);
+			}
+
+		}
+		return ListaDeRestaurantes;
+	}
+
+	public static List<Restaurante> buscarPorNombre(List<Restaurante> ListRest, String nombreBuscado) {
+		List<Restaurante> ListaDeRestaurantes = new ArrayList<>();
+
+		for (Restaurante restaurante : ListRest) {
+			if (restaurante.getNombre().contains(nombreBuscado)) {
+				ListaDeRestaurantes.add(restaurante);
+			}
+
+		}
+		return ListaDeRestaurantes;
+	}
+
+	public static List<Restaurante> buscarPorBarrio(List<Restaurante> ListRest, String barrioBuscado) {
+		List<Restaurante> ListaDeRestaurantes = new ArrayList<>();
+
+		for (Restaurante restaurante : ListRest) {
+			if (restaurante.getBarrio().contains(barrioBuscado)) {
+				ListaDeRestaurantes.add(restaurante);
+			}
+
+		}
+		return ListaDeRestaurantes;
+	}
+
 }

@@ -30,7 +30,7 @@ https://goo.gl/maps/DUmVjnSZeX6Y9n448
 -4.4909181
 centro
 hamburguesas, patas fritas, helados
-McDonadls
+100montaditos
 MC Donadls Plza de la Marina
 www.mcdonalds.com
 https://goo.gl/maps/DUmVjnSZeX6Y9n448
@@ -60,8 +60,8 @@ www.mcdonalds.com
 https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
-centro
-hamburguesas, patas fritas, helados
+la palmilla
+hamburguesas, patas fritas, fritura
 McDonadls
 MC Donadls Plza de la Marina
 www.mcdonalds.com
@@ -69,12 +69,12 @@ https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
 centro
-hamburguesas, patas fritas, helados
-McDonadls
+hamburguesas, patas fritas, fritura
+McDonadls2
 MC Donadls Plza de la Marina
 www.mcdonalds.com
 https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
 centro
-hamburguesas, patas fritas, helados
+hamburguesas, patas fritas, fritura
