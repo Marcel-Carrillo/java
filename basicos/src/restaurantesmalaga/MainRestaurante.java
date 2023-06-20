@@ -78,7 +78,7 @@ public class MainRestaurante {
 			boolean esta = buscarRestaurante(ListRest, r5);
 			System.out.println("R5 esta en la lista " + esta);
 
-			List<Restaurante> estaLaEspecialidad = buscarPorEspecialidad(ListRest, " patatas");
+			List<Restaurante> estaLaEspecialidad = buscarPorEspecialidad(ListRest, "patatas");
 			System.out.println("Los restaurantes que tienen la especialidad que te gusta son " + estaLaEspecialidad);
 
 			List<Restaurante> estaElNombre = buscarPorNombre(ListRest, "McDonadls2");
