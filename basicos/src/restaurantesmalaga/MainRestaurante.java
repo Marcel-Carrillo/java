@@ -72,11 +72,38 @@ public class MainRestaurante {
 			Path path = file.toPath(); // convierto a path para usar el nuevo api
 			List<String> lineas = Files.readAllLines(path); // leo todo el fichero en una linea
 			List<Restaurante> ListRest = cargarRestaurantes(lineas);
-			System.out.println("La lista tiene " +ListRest.size());
+			System.out.println("La lista tiene " + ListRest.size());
+			mostrarRestaurantes(ListRest);
+			Restaurante r5 = ListRest.get(4);
+			boolean esta = buscarRestaurante(ListRest, r5);
+			System.out.println("R5 esta en la lista " + esta);
+			
 		} else {
 			System.out.println("No existe el fichero en esa ruta: (");
 		}
 
 	}
 
+	public static void mostrarRestaurantes(List<Restaurante> ListRest) {
+		// muestra nombre canonigo seguida de una ruta interna de la memoria
+		System.out.println("Mostrando restaurantes...");
+		for (Restaurante r : ListRest) {
+			System.out.println(r.toString());
+		}
+	}
+	
+	public static boolean buscarRestaurante (List<Restaurante> ListRest, Restaurante restauranteBuscado) {
+		boolean estaRestaurante = false;
+		int pos_actual = 0;
+		int longitud = ListRest.size();
+		Restaurante restauranteAux = null;
+		
+		while (pos_actual < longitud && !estaRestaurante ) {
+			restauranteAux = ListRest.get(pos_actual);
+			estaRestaurante = restauranteAux.equals(restauranteBuscado);
+			pos_actual += 1;
+		}
+		
+		return estaRestaurante;
+	}
 }
