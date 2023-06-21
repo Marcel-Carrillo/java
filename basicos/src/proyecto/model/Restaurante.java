@@ -13,6 +13,7 @@ public class Restaurante {
 	private float latitud;
 	private float longitud;
 	private String barrio;
+	private Float precioMedio;
 	private List<String> especialidades;
 
 	public Restaurante() {
@@ -20,7 +21,7 @@ public class Restaurante {
 	}
 
 	public Restaurante(String nombre, String direccion, String web, String fichaGoogle, float latitud, float longitud,
-			String barrio, String... especialidades) // varargs
+			String barrio,float precioMedio, String... especialidades) // varargs
 	{
 		super();
 		this.nombre = nombre;
@@ -30,6 +31,7 @@ public class Restaurante {
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.barrio = barrio;
+		this.precioMedio = precioMedio;
 		this.especialidades = Arrays.asList(especialidades);
 	}
 
@@ -88,6 +90,17 @@ public class Restaurante {
 	public void setBarrio(String barrio) {
 		this.barrio = barrio;
 	}
+	
+	
+	public float getPrecioMedio() {
+		return precioMedio;
+	}
+	
+	public void setPrecioMedio(Float precioMedio) {
+		this.precioMedio = precioMedio;
+	}
+	
+	
 
 	public List<String> getEspecialidades() {
 		return especialidades;
@@ -101,7 +114,7 @@ public class Restaurante {
 	public String toString() {
 		return "Restaurante [nombre=" + nombre + ", direccion=" + direccion + ", web=" + web + ", fichaGoogle="
 				+ fichaGoogle + ", latitud=" + latitud + ", longitud=" + longitud + ", barrio=" + barrio
-				+ ", especialidades=" + especialidades + "]";
+				+ ", precioMedio=" + precioMedio + ", especialidades=" + especialidades + "]";
 	}
 
 	@Override

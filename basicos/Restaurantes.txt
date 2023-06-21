@@ -5,6 +5,7 @@ https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
 centro
+20
 hamburguesas,patas fritas,helados
 McDonadls
 MC Donadls Plza de la Marina
@@ -13,6 +14,7 @@ https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
 centro
+15
 hamburguesas,patas fritas,helados
 McDonadls
 MC Donadls Plza de la Marina
@@ -21,6 +23,7 @@ https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
 centro
+18
 hamburguesas,patas fritas,helados
 McDonadls
 MC Donadls Plza de la Marina
@@ -29,6 +32,7 @@ https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
 centro
+18
 hamburguesas,patas fritas,helados
 100montaditos
 MC Donadls Plza de la Marina
@@ -37,6 +41,7 @@ https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
 centro
+20
 hamburguesas,patas fritas,helados
 McDonadls
 MC Donadls Plza de la Marina
@@ -45,6 +50,7 @@ https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
 centro
+25
 hamburguesas,patas fritas,helados
 DonPataton
 MC Donadls Plza de la Marina
@@ -53,6 +59,7 @@ https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
 centro
+30
 hamburguesas,patatas,helados
 McDonadls
 MC Donadls Plza de la Marina
@@ -61,7 +68,8 @@ https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
 la palmilla
-hamburguesas,patas fritas,fritura
+30
+hamburguesas,patas fritas, fritura
 MrPatatita
 MC Donadls Plza de la Marina
 www.mcdonalds.com
@@ -69,7 +77,8 @@ https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
 centro
-hamburguesas,patatas,fritura
+35
+hamburguesas,patatas, fritura
 McDonadls2
 MC Donadls Plza de la Marina
 www.mcdonalds.com
@@ -77,4 +86,5 @@ https://goo.gl/maps/DUmVjnSZeX6Y9n448
 36.7184846
 -4.4909181
 centro
+50
 hamburguesas,patas fritas,fritura

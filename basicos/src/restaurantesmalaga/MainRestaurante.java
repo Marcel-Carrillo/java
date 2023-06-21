@@ -15,6 +15,12 @@ import java.util.Iterator;
 public class MainRestaurante {
 
 	private static final String RUTA_FICHERO = "Restaurantes.txt";
+	
+	private static void quitarBlancos(String[] especialidades) {
+		for(int z = 0; z < especialidades.length; z++) {
+			especialidades[z]=especialidades[z].trim();//quita espacios por delante y por detras
+		}
+	}
 
 	public static List<Restaurante> cargarRestaurantes(List<String> lineas) {
 
@@ -49,7 +55,11 @@ public class MainRestaurante {
 				restauranteAux.setBarrio(linea);
 				break;
 			case 8:
+				restauranteAux.setPrecioMedio(Float.parseFloat(linea));
+				break;
+			case 9:
 				String[] especialidades = linea.split(","); // troceo esp1 esp2 esp3
+				quitarBlancos(especialidades);
 				// paso de array a lista
 				List<String> lespecialidades = Arrays.asList(especialidades);
 				restauranteAux.setEspecialidades(lespecialidades);
@@ -78,7 +88,7 @@ public class MainRestaurante {
 			boolean esta = buscarRestaurante(ListRest, r5);
 			System.out.println("R5 esta en la lista " + esta);
 
-			List<Restaurante> estaLaEspecialidad = buscarPorEspecialidad(ListRest, "patatas");
+			List<Restaurante> estaLaEspecialidad = buscarPorEspecialidad(ListRest, "fritura");
 			System.out.println("Los restaurantes que tienen la especialidad que te gusta son " + estaLaEspecialidad);
 
 			List<Restaurante> estaElNombre = buscarPorNombre(ListRest, "McDonadls2");
@@ -139,6 +149,19 @@ public class MainRestaurante {
 		}
 		return ListaDeRestaurantes;
 	}
+	
+	/* List<Restaurante> listaRestNombres = null;
+	 * listaRestNombres = new ArrayList<Restaurante>();
+	 * for (Restaurante r : listaRestNombres){
+	 * if(r.getNombre().indexOf(nombre)!=-1){
+	 * listaRestNombres.add(r);
+	 }}*/
+	 
+	/*Mostrar restaurantes lambda
+	 * listRest.forEach(restaurante->System.out.println(restaurante));
+	 */
+	
+	
 
 	public static List<Restaurante> buscarPorBarrio(List<Restaurante> ListRest, String barrioBuscado) {
 		List<Restaurante> ListaDeRestaurantes = new ArrayList<>();
