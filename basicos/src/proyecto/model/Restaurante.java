@@ -21,7 +21,7 @@ public class Restaurante {
 	}
 
 	public Restaurante(String nombre, String direccion, String web, String fichaGoogle, float latitud, float longitud,
-			String barrio,float precioMedio, String... especialidades) // varargs
+			String barrio, float precioMedio, String... especialidades) // varargs
 	{
 		super();
 		this.nombre = nombre;
@@ -90,17 +90,14 @@ public class Restaurante {
 	public void setBarrio(String barrio) {
 		this.barrio = barrio;
 	}
-	
-	
+
 	public float getPrecioMedio() {
 		return precioMedio;
 	}
-	
+
 	public void setPrecioMedio(Float precioMedio) {
 		this.precioMedio = precioMedio;
 	}
-	
-	
 
 	public List<String> getEspecialidades() {
 		return especialidades;
@@ -121,11 +118,11 @@ public class Restaurante {
 	public boolean equals(Object obj) {
 		boolean iguales = false;
 		// TODO Auto-generated method stub
-		
-		if(obj!=null) {
-			if(obj instanceof Restaurante r) {
-				//para mi dos restaurantes son iguales si tienen la misma direccion
-			    iguales = this.direccion.equals(r.direccion);
+
+		if (obj != null) {
+			if (obj instanceof Restaurante r) {
+				// para mi dos restaurantes son iguales si tienen la misma direccion
+				iguales = this.direccion.equals(r.direccion);
 			}
 		}
 		return iguales;

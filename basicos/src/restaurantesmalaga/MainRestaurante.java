@@ -15,10 +15,10 @@ import java.util.Iterator;
 public class MainRestaurante {
 
 	private static final String RUTA_FICHERO = "Restaurantes.txt";
-	
+
 	private static void quitarBlancos(String[] especialidades) {
-		for(int z = 0; z < especialidades.length; z++) {
-			especialidades[z]=especialidades[z].trim();//quita espacios por delante y por detras
+		for (int z = 0; z < especialidades.length; z++) {
+			especialidades[z] = especialidades[z].trim();// quita espacios por delante y por detras
 		}
 	}
 
@@ -97,6 +97,9 @@ public class MainRestaurante {
 			List<Restaurante> estaElBarrio = buscarPorBarrio(ListRest, "la palmilla");
 			System.out.println("Los restaurantes que estan en el barrio que quieres son " + estaElBarrio);
 
+			List<Restaurante> estaElPrecio = buscarPorPrecio(ListRest, (float) 30);
+			System.out.println("Los restaurantes que tienen ese precio medio son " + estaElPrecio);
+
 		} else {
 			System.out.println("No existe el fichero en esa ruta: (");
 		}
@@ -149,19 +152,28 @@ public class MainRestaurante {
 		}
 		return ListaDeRestaurantes;
 	}
-	
-	/* List<Restaurante> listaRestNombres = null;
-	 * listaRestNombres = new ArrayList<Restaurante>();
-	 * for (Restaurante r : listaRestNombres){
-	 * if(r.getNombre().indexOf(nombre)!=-1){
-	 * listaRestNombres.add(r);
-	 }}*/
-	 
-	/*Mostrar restaurantes lambda
+
+	/*
+	 * List<Restaurante> listaRestNombres = null; listaRestNombres = new
+	 * ArrayList<Restaurante>(); for (Restaurante r : listaRestNombres){
+	 * if(r.getNombre().indexOf(nombre)!=-1){ listaRestNombres.add(r); }}
+	 */
+
+	/*
+	 * Mostrar restaurantes lambda
 	 * listRest.forEach(restaurante->System.out.println(restaurante));
 	 */
-	
-	
+
+	public static List<Restaurante> buscarPorPrecio(List<Restaurante> ListRest, Float precio) {
+		List<Restaurante> ListaPorPrecio = new ArrayList<>();
+
+		for (Restaurante restaurante : ListRest) {
+			if (restaurante.getPrecioMedio() == precio) {
+				ListaPorPrecio.add(restaurante);
+			}
+		}
+		return ListaPorPrecio;
+	}
 
 	public static List<Restaurante> buscarPorBarrio(List<Restaurante> ListRest, String barrioBuscado) {
 		List<Restaurante> ListaDeRestaurantes = new ArrayList<>();
