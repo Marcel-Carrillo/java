@@ -3,7 +3,7 @@ package proyecto.model;
 import java.util.Arrays;
 import java.util.List;
 
-public class Restaurante {
+public class Restaurante implements Comparable<Restaurante> {
 
 	// id?¿
 	private String nombre;
@@ -126,5 +126,17 @@ public class Restaurante {
 			}
 		}
 		return iguales;
+	}
+
+	@Override
+	public int compareTo(Restaurante o) {
+		int resultado = 0;
+		if (this.precioMedio > o.precioMedio) {
+			resultado = 1;
+		} else if (this.precioMedio < o.precioMedio) {
+			resultado = -1;
+		}
+		// TODO Auto-generated method stub
+		return resultado;
 	}
 }

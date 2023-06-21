@@ -6,11 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+import proyecto.model.ComparadorDeRestaurantes;
 import proyecto.model.Restaurante;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
+import java.util.Collections;
 
 public class MainRestaurante {
 
@@ -82,8 +83,17 @@ public class MainRestaurante {
 			Path path = file.toPath(); // convierto a path para usar el nuevo api
 			List<String> lineas = Files.readAllLines(path); // leo todo el fichero en una linea
 			List<Restaurante> ListRest = cargarRestaurantes(lineas);
-			System.out.println("La lista tiene " + ListRest.size());
+			System.out.println("La lista ORIGINAL tiene " + ListRest.size());
 			mostrarRestaurantes(ListRest);
+			System.out.println("La lista ORDENADA por precio " + ListRest.size());
+			Collections.sort(ListRest);// orden natural
+			mostrarRestaurantes(ListRest);
+
+			System.out.println("La lista ORDENADA por nombre " + ListRest.size());
+			ComparadorDeRestaurantes cr = new ComparadorDeRestaurantes();
+			Collections.sort(ListRest, cr);// orden total
+			mostrarRestaurantes(ListRest);
+
 			Restaurante r5 = ListRest.get(4);
 			boolean esta = buscarRestaurante(ListRest, r5);
 			System.out.println("R5 esta en la lista " + esta);
@@ -97,8 +107,9 @@ public class MainRestaurante {
 			List<Restaurante> estaElBarrio = buscarPorBarrio(ListRest, "la palmilla");
 			System.out.println("Los restaurantes que estan en el barrio que quieres son " + estaElBarrio);
 
-			List<Restaurante> estaElPrecio = buscarPorPrecio(ListRest, (float) 30);
+			List<Restaurante> estaElPrecio = buscarPorPrecio(ListRest, (float) 19);
 			System.out.println("Los restaurantes que tienen ese precio medio son " + estaElPrecio);
+			mostrarRestaurantes(estaElPrecio);
 
 		} else {
 			System.out.println("No existe el fichero en esa ruta: (");
@@ -174,6 +185,22 @@ public class MainRestaurante {
 		}
 		return ListaPorPrecio;
 	}
+
+	/*
+	 * busqueda por precio con funcion lambda
+	 * 
+	 * public static List<Restaurante> buscarPorPrecioMedio(List<Restaurante>
+	 * listRest, float presupuesto){ List<Restaurante> lRestConPrecioMaximoBuscado =
+	 * null;
+	 * 
+	 * 
+	 * lRestConPrecioMaximoBuscado = listRest .stream() .filter(r -> {return
+	 * (r.getPrecioMedio()<=presupuesto);}) .toList();
+	 * 
+	 * return lRestConPrecioMaximoBuscado;
+	 * 
+	 * }
+	 */
 
 	public static List<Restaurante> buscarPorBarrio(List<Restaurante> ListRest, String barrioBuscado) {
 		List<Restaurante> ListaDeRestaurantes = new ArrayList<>();
