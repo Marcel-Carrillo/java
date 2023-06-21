@@ -168,7 +168,7 @@ public class MainRestaurante {
 		List<Restaurante> ListaPorPrecio = new ArrayList<>();
 
 		for (Restaurante restaurante : ListRest) {
-			if (restaurante.getPrecioMedio() == precio) {
+			if (restaurante.getPrecioMedio() <= precio) {
 				ListaPorPrecio.add(restaurante);
 			}
 		}
