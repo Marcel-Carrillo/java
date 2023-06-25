@@ -65,10 +65,11 @@ public class MainMapas {
 
 	private static Restaurante obtenerMasBarato(List<Restaurante> lrb) {
 		Restaurante restMasBarato = null;
-		float precioComparado = lrb.get(0).getPrecioMedio();
+		 float precioComparado = lrb.get(0).getPrecioMedio();
+		 restMasBarato = lrb.get(0);
 
 		for (Restaurante r : lrb) {
-			if (r.getPrecioMedio() <= precioComparado) {
+			if (r.getPrecioMedio() < precioComparado) {
 				restMasBarato = r;
 				precioComparado = r.getPrecioMedio();
 			}
