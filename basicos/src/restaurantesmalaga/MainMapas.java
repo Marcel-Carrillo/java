@@ -57,6 +57,8 @@ public class MainMapas {
 
 			Float precioMedio = precioMedioDeUnBarrio(mapaRestaurantesPorBarrios, "Centro");
 			System.out.println("El precio medio del barrio es " + precioMedio);
+			
+			
 
 		} else {
 			System.out.println("FICHERO NO EXISTE!");
@@ -88,6 +90,25 @@ public class MainMapas {
 		}
 
 		return listaMasBaratos;
+	}
+	
+	public static Restaurante obtenerRMasBarato (Map<String, List<Restaurante>> mr) {
+		Restaurante restaMasBarato = null;
+	    Float precioMenor = null;
+		
+		Set<String> cjtoBarrios = mr.keySet();
+		for (String barrio : cjtoBarrios) {
+			List<Restaurante> lra = mr.get(barrio);
+			for(Restaurante rest : lra) {
+				if(rest.getPrecioMedio() < precioMenor) {
+					precioMenor = rest.getPrecioMedio();
+					restaMasBarato = rest;
+				}
+			}
+			
+		}
+		
+		return restaMasBarato;
 	}
 
 	public static Float precioMedioDeUnBarrio(Map<String, List<Restaurante>> mapaRest, String barrioParaPrecio) {
