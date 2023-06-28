@@ -72,20 +72,20 @@ public class RestauranteController {
 	}
 
 	// Consultar 1 restaurante
-	
+
 	@Operation(description = "Este servicio permite la consulta de 1 restaurante por un id")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> listarPorId(@PathVariable Long id) {
 		ResponseEntity<?> responseEntity = null;
 		Optional<Restaurante> or = null;
-		
+
 		or = this.restauranteService.consultarRestaurante(id);
-		if(or.isPresent()) {
-			//la consulta a recuperado un registro
+		if (or.isPresent()) {
+			// la consulta a recuperado un registro
 			Restaurante restauranteLeido = or.get();
 			responseEntity = ResponseEntity.ok(restauranteLeido);
-		}else {
-			//la consulta no ha recuperado un registro
+		} else {
+			// la consulta no ha recuperado un registro
 			responseEntity = ResponseEntity.noContent().build();
 		}
 
@@ -98,7 +98,7 @@ public class RestauranteController {
 		ResponseEntity<?> responseEntity = null;
 		this.restauranteService.borrarRestaurante(id);
 		responseEntity = ResponseEntity.ok().build();
-		
+
 		return responseEntity;
 	}
 
@@ -107,10 +107,10 @@ public class RestauranteController {
 	public ResponseEntity<?> insertarRestaurante(@RequestBody Restaurante restaurante) {
 		ResponseEntity<?> responseEntity = null;
 		Restaurante restauranteNuevo = null;
-		
+
 		restauranteNuevo = this.restauranteService.altaRestaurante(restaurante);
 		responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(restauranteNuevo);
-		
+
 		return responseEntity;
 	}
 

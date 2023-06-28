@@ -16,7 +16,6 @@ public class RestauranteServiceImpl implements RestauranteService {
 	// metodos.
 	@Autowired
 	RestauranteRepository restauranteRepository;
-	
 
 	@Override
 	@Transactional(readOnly = true) // permitimos acceso concurrente a la tabla , varios a la vez
