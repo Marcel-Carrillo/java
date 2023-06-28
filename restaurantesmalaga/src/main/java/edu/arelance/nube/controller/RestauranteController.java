@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.arelance.nube.repository.entity.Restaurante;
 import edu.arelance.nube.service.RestauranteService;
+import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * API WEB HTTP -> Deriva en la ejecucion de un método a traves de TOMCAT(recibe
@@ -71,6 +72,8 @@ public class RestauranteController {
 	}
 
 	// Consultar 1 restaurante
+	
+	@Operation(description = "Este servicio permite la consulta de 1 restaurante por un id")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> listarPorId(@PathVariable Long id) {
 		ResponseEntity<?> responseEntity = null;
