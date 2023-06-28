@@ -35,11 +35,11 @@ public class Restaurante {
 
 	private Integer precioMedio;
 
-	private String especialiadad1;
+	private String especialidad1;
 
-	private String especialiadad2;
+	private String especialidad2;
 
-	private String especialiadad3;
+	private String especialidad3;
 
 	@Column(name = "creado_en")
 	private LocalDateTime creadoEn;
@@ -54,13 +54,13 @@ public class Restaurante {
 	public String toString() {
 		return "Restaurante [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", barrio=" + barrio
 				+ ", web=" + web + ", fichaGoogle=" + fichaGoogle + ", latitud=" + latitud + ", longitud=" + longitud
-				+ ", precioMedio=" + precioMedio + ", especialiadad1=" + especialiadad1 + ", especialiadad2="
-				+ especialiadad2 + ", especialiadad3=" + especialiadad3 + ", creadoEn=" + creadoEn + "]";
+				+ ", precioMedio=" + precioMedio + ", especialidad1=" + especialidad1 + ", especialidad2="
+				+ especialidad2 + ", especialidad3=" + especialidad3 + ", creadoEn=" + creadoEn + "]";
 	}
 
 	public Restaurante(Long id, String nombre, String direccion, String barrio, String web, String fichaGoogle,
-			Float latitud, Float longitud, Integer precioMedio, String especialiadad1, String especialiadad2,
-			String especialiadad3, LocalDateTime creadoEn) {
+			Float latitud, Float longitud, Integer precioMedio, String especialidad1, String especialidad2,
+			String especialidad3, LocalDateTime creadoEn) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -71,9 +71,9 @@ public class Restaurante {
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.precioMedio = precioMedio;
-		this.especialiadad1 = especialiadad1;
-		this.especialiadad2 = especialiadad2;
-		this.especialiadad3 = especialiadad3;
+		this.especialidad1 = especialidad1;
+		this.especialidad2 = especialidad2;
+		this.especialidad3 = especialidad3;
 		this.creadoEn = creadoEn;
 	}
 
@@ -154,27 +154,27 @@ public class Restaurante {
 	}
 
 	public String getEspecialiadad1() {
-		return especialiadad1;
+		return especialidad1;
 	}
 
 	public void setEspecialiadad1(String especialiadad1) {
-		this.especialiadad1 = especialiadad1;
+		this.especialidad1 = especialiadad1;
 	}
 
 	public String getEspecialiadad2() {
-		return especialiadad2;
+		return especialidad2;
 	}
 
 	public void setEspecialiadad2(String especialiadad2) {
-		this.especialiadad2 = especialiadad2;
+		this.especialidad2 = especialiadad2;
 	}
 
 	public String getEspecialiadad3() {
-		return especialiadad3;
+		return especialidad3;
 	}
 
 	public void setEspecialiadad3(String especialiadad3) {
-		this.especialiadad3 = especialiadad3;
+		this.especialidad3 = especialiadad3;
 	}
 
 	public LocalDateTime getCreadoEn() {

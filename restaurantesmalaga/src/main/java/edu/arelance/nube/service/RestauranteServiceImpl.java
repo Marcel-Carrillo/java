@@ -2,6 +2,7 @@ package edu.arelance.nube.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +14,9 @@ public class RestauranteServiceImpl implements RestauranteService {
 
 	// Es una instacia de la clase RestauranteRepository para poder usar sus
 	// metodos.
+	@Autowired
 	RestauranteRepository restauranteRepository;
+	
 
 	@Override
 	@Transactional(readOnly = true) // permitimos acceso concurrente a la tabla , varios a la vez
