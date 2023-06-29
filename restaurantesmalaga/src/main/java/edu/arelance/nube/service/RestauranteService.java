@@ -20,6 +20,14 @@ public interface RestauranteService {
 	void borrarRestaurante (Long id);
 	
 	Optional<Restaurante> modificarRestaurante (Long id, Restaurante restaurante);
+
+	Iterable<Restaurante> findByPrecioMedioBetween(int precioMin, int precioMax);
+	
+	Iterable<Restaurante> buscarRestaurantePorPalabra (String palabraBuscada1,String palabraBuscada2,String palabraBuscada3);
+	
+	Iterable<Restaurante> buscarRestaurantePorClave (String clave);
+	
+	
 	
 
 }

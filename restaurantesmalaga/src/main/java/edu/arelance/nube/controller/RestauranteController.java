@@ -118,6 +118,53 @@ public class RestauranteController {
 	@PutMapping("/{id}")
 	public ResponseEntity<?> modificarRestaurante(@RequestBody Restaurante restaurante, @PathVariable Long id) {
 		ResponseEntity<?> responseEntity = null;
+		Optional<Restaurante> opRest = null;
+
+		opRest = this.restauranteService.modificarRestaurante(id, restaurante);
+		if (opRest.isPresent()) {
+			Restaurante rm = opRest.get();
+			responseEntity = ResponseEntity.ok(rm);
+		} else {
+			responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+
+		return responseEntity;
+	}
+	
+	//Get ver restaurantes por rango de precios GET http://localhost:8081/restaurante/buscarPorPrecio/1/4
+	@GetMapping("/buscarPorPrecio/{precioMin}/{precioMax}")
+	public ResponseEntity<?> findByPrecioMedioBetween(@PathVariable int precioMin,@PathVariable int precioMax){
+		ResponseEntity<?> responseEntity = null;
+		Iterable<Restaurante> listaPorPrecio = null;
+		
+		listaPorPrecio = this.restauranteService.findByPrecioMedioBetween(precioMin, precioMax);	
+		responseEntity = ResponseEntity.ok(listaPorPrecio);
+		
+		return responseEntity;
+	}
+	
+	
+	//Get ver restaurantes por palabra GET http://localhost:8081/restaurante/buscarPorPalabra/arroz/arroz/arroz
+	@GetMapping("/buscarPorPalabra/{palabraBuscada1}/{palabraBuscada2}/{palabraBuscada3}")
+	public ResponseEntity<?> buscarRestaurantePorPalabra (@PathVariable String palabraBuscada1,@PathVariable String palabraBuscada2,@PathVariable String palabraBuscada3){
+		ResponseEntity<?> responseEntity = null;
+		Iterable<Restaurante> listaPorPalabra = null;
+		
+		listaPorPalabra = this.restauranteService.buscarRestaurantePorPalabra(palabraBuscada1,palabraBuscada2,palabraBuscada3);
+		responseEntity = ResponseEntity.ok(listaPorPalabra);
+		
+		return responseEntity;
+	}
+	
+	//Get ver restaurantes por clave GET http://localhost:8081/restaurante/buscarPorClave/arroz
+	@GetMapping("/buscarPorClave/{clave}")
+	public ResponseEntity<?> buscarPorClave (@PathVariable String clave){
+		ResponseEntity<?> responseEntity = null;
+		Iterable<Restaurante> listaPorPalabra = null;
+		
+		listaPorPalabra = this.restauranteService.buscarRestaurantePorClave(clave);
+		responseEntity = ResponseEntity.ok(listaPorPalabra);
+		
 		return responseEntity;
 	}
 

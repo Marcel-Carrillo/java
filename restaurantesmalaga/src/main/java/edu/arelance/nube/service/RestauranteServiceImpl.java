@@ -2,6 +2,7 @@ package edu.arelance.nube.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,8 +45,47 @@ public class RestauranteServiceImpl implements RestauranteService {
 	@Override
 	@Transactional
 	public Optional<Restaurante> modificarRestaurante(Long id, Restaurante restaurante) {
+		Optional<Restaurante> opRest = Optional.empty();
+		//1 Leer
+		opRest = this.restauranteRepository.findById(id);
+		if(opRest.isPresent()) {
+			//Al estar dentro de una transaccion, restauranteLeido esta asociado a un registro de la tabla,
+			//si modifico un campo estoy modificando la columna asociada (Estado Persistent- (estandar) JPA)
+		Restaurante restauranteLeido = opRest.get();
+		//restauranteLeido.setNombre(restaurante.getNombre());
+		BeanUtils.copyProperties(restaurante, restauranteLeido, "id","creadoEn");
+		opRest = Optional.of(restauranteLeido); //Relleno el optional
+		}
+		//2 Actualizar
+		
+		return opRest;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Iterable<Restaurante> findByPrecioMedioBetween(int precioMin, int precioMax){
+		Iterable<Restaurante> listaRestaPorPrecio = null;
+		listaRestaPorPrecio = this.restauranteRepository.findByPrecioMedioBetween(precioMin, precioMax);
+		
+		return listaRestaPorPrecio;
+	}
 
-		return Optional.empty();
+	@Override
+	@Transactional(readOnly = true)
+	public Iterable<Restaurante> buscarRestaurantePorPalabra(String palabraBuscada1,String palabraBuscada2,String palabraBuscada3) {
+		Iterable<Restaurante> listaRestPalabra = null;
+		listaRestPalabra = this.restauranteRepository.findByNombreOrBarrioOrEspecialidad1IgnoreCase(palabraBuscada1,palabraBuscada2,palabraBuscada3);
+		
+		return listaRestPalabra;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Iterable<Restaurante> buscarRestaurantePorClave(String clave) {
+		Iterable<Restaurante> listaRestPalabra = null;
+		listaRestPalabra = this.restauranteRepository.buscarPorBarrioNombreOEspecialida(clave);
+		
+		return listaRestPalabra;
 	}
 
 }

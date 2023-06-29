@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GestionDeExcepciones {
 
 	// para cada tipo de excepcion / defino un metodo
-
 	@ExceptionHandler(StringIndexOutOfBoundsException.class)
 	public ResponseEntity<?> gestionStringOutIndexException(StringIndexOutOfBoundsException e) {
 		ResponseEntity<?> responseEntity = null;

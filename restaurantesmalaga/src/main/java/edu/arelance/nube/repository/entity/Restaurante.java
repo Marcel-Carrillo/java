@@ -157,24 +157,24 @@ public class Restaurante {
 		return especialidad1;
 	}
 
-	public void setEspecialiadad1(String especialiadad1) {
-		this.especialidad1 = especialiadad1;
+	public void setEspecialiadad1(String especialidad1) {
+		this.especialidad1 = especialidad1;
 	}
 
 	public String getEspecialiadad2() {
 		return especialidad2;
 	}
 
-	public void setEspecialiadad2(String especialiadad2) {
-		this.especialidad2 = especialiadad2;
+	public void setEspecialiadad2(String especialidad2) {
+		this.especialidad2 = especialidad2;
 	}
 
 	public String getEspecialiadad3() {
 		return especialidad3;
 	}
 
-	public void setEspecialiadad3(String especialiadad3) {
-		this.especialidad3 = especialiadad3;
+	public void setEspecialiadad3(String especialidad3) {
+		this.especialidad3 = especialidad3;
 	}
 
 	public LocalDateTime getCreadoEn() {
