@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "restaurantes")
@@ -18,11 +21,14 @@ public class Restaurante {
 	@Id // Indico a spring que este sera la clave primaria
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // autoInc en MySQL
 	private Long id;
-
-	private String nombre;
-
+	
+	@NotEmpty
+	private String nombre;//
+	
+	@NotEmpty
 	private String direccion;
-
+	
+	@NotEmpty
 	private String barrio;
 
 	private String web;
@@ -33,6 +39,8 @@ public class Restaurante {
 
 	private Float longitud;
 
+	@Min(2)
+	@Max(500)
 	private Integer precioMedio;
 
 	private String especialidad1;

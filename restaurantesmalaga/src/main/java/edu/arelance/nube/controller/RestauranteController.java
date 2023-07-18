@@ -1,7 +1,10 @@
 package edu.arelance.nube.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,7 +51,7 @@ public class RestauranteController {
 
 	@Autowired
 	RestauranteService restauranteService;
-	
+
 	Logger logger = LoggerFactory.getLogger(RestauranteController.class);
 
 	@GetMapping("/test") // GET http://localhost:8081/restaurante/test
@@ -84,16 +89,20 @@ public class RestauranteController {
 		ResponseEntity<?> responseEntity = null;
 		Optional<Restaurante> or = null;
 
+		logger.debug("en listarPorId" + id);
 		or = this.restauranteService.consultarRestaurante(id);
 		if (or.isPresent()) {
 			// la consulta a recuperado un registro
 			Restaurante restauranteLeido = or.get();
 			responseEntity = ResponseEntity.ok(restauranteLeido);
+			logger.debug("recuperado el registo " + restauranteLeido);
 		} else {
 			// la consulta no ha recuperado un registro
 			responseEntity = ResponseEntity.noContent().build();
+			logger.debug("El restaurante con " + id + " no existe");
 		}
 
+		logger.debug("Saliendo de listarPorId");
 		return responseEntity;
 	}
 
@@ -109,67 +118,124 @@ public class RestauranteController {
 
 	// Post insertar en la base de datos 1 rest
 	@PostMapping
-	public ResponseEntity<?> insertarRestaurante(@RequestBody Restaurante restaurante) {
+	public ResponseEntity<?> insertarRestaurante(@Valid @RequestBody Restaurante restaurante,
+			BindingResult bindingResult) {
 		ResponseEntity<?> responseEntity = null;
 		Restaurante restauranteNuevo = null;
 
-		restauranteNuevo = this.restauranteService.altaRestaurante(restaurante);
-		responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(restauranteNuevo);
-
-		return responseEntity;
-	}
-
-	// Put modifica en la base de datos 1 rest
-	@PutMapping("/{id}")
-	public ResponseEntity<?> modificarRestaurante(@RequestBody Restaurante restaurante, @PathVariable Long id) {
-		ResponseEntity<?> responseEntity = null;
-		Optional<Restaurante> opRest = null;
-
-		opRest = this.restauranteService.modificarRestaurante(id, restaurante);
-		if (opRest.isPresent()) {
-			Restaurante rm = opRest.get();
-			responseEntity = ResponseEntity.ok(rm);
+		// TODO validar
+		if (bindingResult.hasErrors()) {
+			logger.debug("Errores en la entrada POST");
+			responseEntity = generarRespuestaErroresValidacion(bindingResult);
 		} else {
-			responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			logger.debug("SIN errores en la entrada POST");
+			restauranteNuevo = this.restauranteService.altaRestaurante(restaurante);
+			responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(restauranteNuevo);
 		}
 
 		return responseEntity;
 	}
 	
-	//Get ver restaurantes por rango de precios GET http://localhost:8081/restaurante/buscarPorPrecio/1/4
+	private ResponseEntity<?> generarRespuestaErroresValidacion(BindingResult bindingResult){
+		ResponseEntity<?> responseEntity = null;
+		List<ObjectError> listaErrores = null;
+		
+		listaErrores = bindingResult.getAllErrors();
+		//imprimir los errores por el log
+		listaErrores.forEach(e -> logger.error(e.toString()));
+		
+		responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(listaErrores);
+		
+		return responseEntity;
+	}
+
+	/*
+	 *   @PutMapping("/{id}")
+	public ResponseEntity<?> modificarRestaurante(@Valid @RequestBody Restaurante restaurante, @PathVariable Long id, BindingResult bindingResult) {
+
+		ResponseEntity<?> responseEntity = null;
+		Optional<Restaurante> opRest = null;
+		if (bindingResult.hasErrors()) {
+			logger.debug("Error en la entrada al PUT");
+			responseEntity = generarRespuestaDeErroresValidacion(bindingResult);
+
+		} else {
+			logger.debug("SIN Error en la entrada al PUT");
+			opRest = this.restauranteService.modificarRestaurante(id, restaurante);
+			if (opRest.isPresent()) {
+				Restaurante rm = opRest.get(); //rm -> restaurante modificado que nos llega del service
+				responseEntity = ResponseEntity.ok(rm);
+			} else {
+				responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			}
+		}
+		return responseEntity;
+	}
+	 */
+	
+	// Put modifica en la base de datos 1 rest
+	@PutMapping("/{id}")
+	public ResponseEntity<?> modificarRestaurante(@Valid @RequestBody Restaurante restaurante, @PathVariable Long id,
+			BindingResult bindingResult) {
+		ResponseEntity<?> responseEntity = null;
+		Optional<Restaurante> opRest = null;
+
+		if (bindingResult.hasErrors()) {
+			logger.debug("Errores en el PUT");
+			responseEntity = generarRespuestaErroresValidacion(bindingResult);
+		} else {
+
+			logger.debug("SIN Errores en el PUT");
+			opRest = this.restauranteService.modificarRestaurante(id, restaurante);
+			if (opRest.isPresent()) {
+				Restaurante rm = opRest.get();
+				responseEntity = ResponseEntity.ok(rm);
+			} else {
+				responseEntity = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			}
+		}
+
+		return responseEntity;
+	}
+
+	// Get ver restaurantes por rango de precios GET
+	// http://localhost:8081/restaurante/buscarPorPrecio/1/4
 	@GetMapping("/buscarPorPrecio/{precioMin}/{precioMax}")
-	public ResponseEntity<?> findByPrecioMedioBetween(@PathVariable int precioMin,@PathVariable int precioMax){
+	public ResponseEntity<?> findByPrecioMedioBetween(@PathVariable int precioMin, @PathVariable int precioMax) {
 		ResponseEntity<?> responseEntity = null;
 		Iterable<Restaurante> listaPorPrecio = null;
-		
-		listaPorPrecio = this.restauranteService.findByPrecioMedioBetween(precioMin, precioMax);	
+
+		listaPorPrecio = this.restauranteService.findByPrecioMedioBetween(precioMin, precioMax);
 		responseEntity = ResponseEntity.ok(listaPorPrecio);
-		
+
 		return responseEntity;
 	}
-	
-	
-	//Get ver restaurantes por palabra GET http://localhost:8081/restaurante/buscarPorPalabra/arroz/arroz/arroz
+
+	// Get ver restaurantes por palabra GET
+	// http://localhost:8081/restaurante/buscarPorPalabra/arroz/arroz/arroz
 	@GetMapping("/buscarPorPalabra/{palabraBuscada1}/{palabraBuscada2}/{palabraBuscada3}")
-	public ResponseEntity<?> buscarRestaurantePorPalabra (@PathVariable String palabraBuscada1,@PathVariable String palabraBuscada2,@PathVariable String palabraBuscada3){
+	public ResponseEntity<?> buscarRestaurantePorPalabra(@PathVariable String palabraBuscada1,
+			@PathVariable String palabraBuscada2, @PathVariable String palabraBuscada3) {
 		ResponseEntity<?> responseEntity = null;
 		Iterable<Restaurante> listaPorPalabra = null;
-		
-		listaPorPalabra = this.restauranteService.buscarRestaurantePorPalabra(palabraBuscada1,palabraBuscada2,palabraBuscada3);
+
+		listaPorPalabra = this.restauranteService.buscarRestaurantePorPalabra(palabraBuscada1, palabraBuscada2,
+				palabraBuscada3);
 		responseEntity = ResponseEntity.ok(listaPorPalabra);
-		
+
 		return responseEntity;
 	}
-	
-	//Get ver restaurantes por clave GET http://localhost:8081/restaurante/buscarPorClave/arroz
+
+	// Get ver restaurantes por clave GET
+	// http://localhost:8081/restaurante/buscarPorClave/arroz
 	@GetMapping("/buscarPorClave/{clave}")
-	public ResponseEntity<?> buscarPorClave (@PathVariable String clave){
+	public ResponseEntity<?> buscarPorClave(@PathVariable String clave) {
 		ResponseEntity<?> responseEntity = null;
 		Iterable<Restaurante> listaPorPalabra = null;
-		
+
 		listaPorPalabra = this.restauranteService.buscarRestaurantePorClave(clave);
 		responseEntity = ResponseEntity.ok(listaPorPalabra);
-		
+
 		return responseEntity;
 	}
 
